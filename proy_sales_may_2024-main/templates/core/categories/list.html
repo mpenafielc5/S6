@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title">{{ title2 }}</h1>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Descripción</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in categories %}
+          <tr>
+            <td>{{ item.description }}</td>
+            <td>{% if item.state %}✔{% else %}➖{% endif %}</td>
+            <td>
+              <a href="{% url 'core:category_update' item.id %}" class="btn btn-warning">✏️</a>
+              <a href="{% url 'core:category_delete' item.id %}" class="btn btn-danger">❌</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center">
+      <a href="{% url 'core:category_create' %}" class="btn btn-primary">Nueva Categoría</a>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

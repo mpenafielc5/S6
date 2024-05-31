@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <div class="card-body">
+      <h1 class="card-title">{{ title2 }}</h1>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Descripción</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for brand in brands %}
+            <tr>
+              <td>{{ brand.description }}</td>
+              <td>{% if brand.state %}✔{% else %}➖{% endif %}</td>
+              <td>
+                <a href="{% url 'core:brand_update' brand.id %}" class="btn btn-warning">✏️</a>
+                <a href="{% url 'core:brand_delete' brand.id %}" class="btn btn-danger">❌</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="text-center">
+        <a href="{% url 'core:brand_create' %}" class="btn btn-primary">Nueva Marca</a>
+      </div>
+    </div>
+  </div>
+  
+{% endblock content %}

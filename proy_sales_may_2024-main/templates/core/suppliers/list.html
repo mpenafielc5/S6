@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h2 class="card-title">{{ title2 }}</h2>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>RUC</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for supplier in suppliers %}
+          <tr>
+            <td>{{ supplier.name }}</td>
+            <td>{{ supplier.ruc }}</td>
+            <td>{{ supplier.address }}</td>
+            <td>{{ supplier.phone }}</td>
+            <td>{% if supplier.state %}✔{% else %}➖{% endif %}</td>
+            <td>
+              <a href="{% url 'core:supplier_update' supplier.id %}" class="btn btn-warning">✏️</a>
+              <a href="{% url 'core:supplier_delete' supplier.id %}" class="btn btn-danger">❌</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center">
+      <a href="{% url 'core:supplier_create' %}" class="btn btn-primary">Nuevo Proveedor</a>
+    </div>
+  </div>
+</div>
+{% endblock content %}
